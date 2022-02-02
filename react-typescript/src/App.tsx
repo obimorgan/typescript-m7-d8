@@ -11,7 +11,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/trackdetails/:id" element={<TrackDetail />} />
+        <Route path="/trackdetail/:id" element={<TrackDetail />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

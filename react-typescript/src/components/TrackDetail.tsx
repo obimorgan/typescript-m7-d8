@@ -7,11 +7,8 @@ interface SearchResult {
     id: number
     title: string
     album:{
-        duration?: string
-        id?: number
         title: string
         cover_medium:string
-        type?: string
     }
     artist:{
         id: number;
@@ -25,7 +22,7 @@ const TrackDetail = () => {
     const params = useParams()
     const [searchResult, setSearchResult] = useState<SearchResult>()
 
-        const fetchData = async () => {
+        const fetchTrack = async () => {
         try {
             let response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/track/${params}`)
             if (response.ok) {
@@ -38,7 +35,7 @@ const TrackDetail = () => {
         }
     }
     useEffect(() => {
-        fetchData()
+        fetchTrack()
     }, [])
 
     return (

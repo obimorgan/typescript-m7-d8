@@ -1,6 +1,6 @@
 
 import { ChangeEvent, useEffect, useState } from "react"
-import { Container, Row, Col, Form, Card } from "react-bootstrap"
+import { Container, Row, Col, Form, Card, Button } from "react-bootstrap"
 import {Link } from 'react-router-dom'
 
 interface SearchResult {
@@ -8,17 +8,14 @@ interface SearchResult {
     id: number
     title: string
     album:{
-    duration?: string
-    id?: number
-    title: string
-    cover_medium:string
-    type?: string
-  }
-  artist:{
-    id: number;
-    name: string;
-    picture_medium: string;
-  }
+        title: string
+        cover_medium:string
+    }
+    artist:{
+        id: number;
+        name: string;
+        picture_medium: string;
+    }
 }
 
 const SearchBar = () => {
@@ -49,16 +46,15 @@ const SearchBar = () => {
     return (
         <Container>
             <Row>
-                <Col>
+                <Col className="mt-5 mb-2">
                     <Form >
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Search tracks</Form.Label>
+                            <h3>Search tracks</h3>
                             <Form.Control
                                 type="text"
                                 placeholder="Search tracks"
                                 value={searchInput}
                                 onChange={handleInput}
-                                
                             />
                             <Form.Text className="text-muted">
                            Goodluck with your search
@@ -69,8 +65,8 @@ const SearchBar = () => {
             </Row>
             <Row>
                 {searchResult.slice(0, 6).map(result => (
-                    <Col>
-                        <Link to={`/trackdetails/${result.id}`}>
+                    <Col className="my-1 mx-1">
+                        <Link to={`/trackdetail/${result.id}`}>
                         <Card key={result.id}border="danger" style={{ width: '18rem' }}>
                             <Card.Header>{result.title }</Card.Header>
                             <Card.Body>
