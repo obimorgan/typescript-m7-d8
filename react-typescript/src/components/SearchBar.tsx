@@ -1,6 +1,6 @@
 
 import { ChangeEvent, useEffect, useState } from "react"
-import { Container, Row, Col, Form, Card, Button } from "react-bootstrap"
+import { Container, Row, Col, Form, Card } from "react-bootstrap"
 import {Link } from 'react-router-dom'
 
 interface SearchResult {
@@ -65,8 +65,8 @@ const SearchBar = () => {
             </Row>
             <Row>
                 {searchResult.slice(0, 6).map(result => (
-                    <Col className="my-1 mx-1">
-                        <Link to={`/trackdetail/${result.id}`}>
+                    <Col key={result.id}className="my-1" md={4}>
+                        <Link to={`trackdetail/${result.id}`}>
                         <Card key={result.id}border="danger" style={{ width: '18rem' }}>
                             <Card.Header>{result.title }</Card.Header>
                             <Card.Body>

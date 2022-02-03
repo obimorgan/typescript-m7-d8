@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import Button from 'react-bootstrap/Button'
+import { Container } from "react-bootstrap"
 
 interface SearchResult {
     duration: number
@@ -16,15 +18,20 @@ interface SearchResult {
         picture_medium: string;
     }
 }
+// interface ParamsId {
+//     id: String
+// }
 
 const TrackDetail = () => {
 
-    const params = useParams()
-    const [searchResult, setSearchResult] = useState<SearchResult>()
+    // const trackId = parseInt(useParams<ParamsId>().id)
+    const  trackId = useParams()
+    // const navigate = useNavigate()
+    const [searchResult, setSearchResult] = useState < SearchResult | null>(null)
 
-        const fetchTrack = async () => {
+    const fetchTrack = async () => {
         try {
-            let response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/track/${params}`)
+            let response = await fetch(`https://striveschool-api.herokuapp.com/api/deezer/track/${trackId}`)
             if (response.ok) {
                 let track = await response.json()
                 console.log(track)
@@ -34,17 +41,22 @@ const TrackDetail = () => {
             console.log(error)
         }
     }
+        
     useEffect(() => {
         fetchTrack()
     }, [])
 
     return (
         <>
-            <Jumbotron>
-                <h1>{searchResult?.title}</h1>
-                    <img src={searchResult?.artist.picture_medium} alt="img" />
-                <p>{searchResult?.album.title}</p>
-            </Jumbotron>
+            <Container>
+                {/* <Button variant="primary" onClick={() => navigate("/")}
+                >Home</Button> */}
+                <Jumbotron>
+                    <h1>{searchResult?.title}</h1>
+                        <img src={searchResult?.artist.picture_medium} alt="img" />
+                    <p>{searchResult?.album.title}</p>
+                </Jumbotron>
+            </Container>
         </>
     )
 }
